@@ -1,0 +1,46 @@
+<!--***************this is post form action page for delete device page*****-->
+<!doctype html>
+<html>
+
+<!---- this is head with links to CSS external file-->
+ <head>
+    <title>SMART HOME</title>
+    <link rel="stylesheet" type="text/css" href="/css/mystyles.css">
+ </head>
+ <!---- this is body of page-->
+ <body>
+    <h1> SMART HOME</h1>
+    <!--this is navigation bar-->
+    <ul id="menu">
+       <li><a href="/">Home</a></li>
+       <li><a href="/devices">Add Device</a></li>
+       <li><a href="/device-status">Device Status</a></li>
+       <li><a href="/device-control">Control Device</a></li>
+       <li><a href="/delete-device">Delete Device</a></li>
+     </ul>
+ 
+    <h2>your smart device <%=newdevice[0]%> is now  deleted from your SmartHub </h2>
+
+    <h3> current devices on SMART HUB :</h3>
+    
+    <!---this is table to populate outstanding device with parameters once user delete's device-->
+    <table id="devices">
+       <tr>
+          <th> Device Name</th>
+          <th> Device type</th>
+          <th> Status</th>
+          <th> Volume</th>
+         </tr>
+        <!---EJS code updates table data with devices from database , by passing variables from middleware-->
+        <% availabledevices.forEach(function(device)
+       { %>
+       <tr>   
+          <td > <%= device.name %></td> 
+          <td > <%= device.devicetype %></td>
+          <td > <%if(device.status==1){%>ON<%} else{%>OFF<%}%></td>
+          <td > <%if(device.volume=="NULL"){%>N/A<%} else{%><%=device.volume%><%}%></td>
+        </tr>
+       <% }) %>
+    </table>
+  </body>
+</html>

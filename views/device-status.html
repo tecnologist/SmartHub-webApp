@@ -1,0 +1,56 @@
+<!--******this is Device status page*****--------->
+<!doctype html>
+<html>
+
+ <!---this is head with links to CSS & Java Script external files -->
+ <head>
+   <title> Add device !</title>
+   <link rel="stylesheet" type="text/css" href="/css/mystyles.css">
+   <script src="JS/deviceStatus.js"></script>
+ </head>
+
+
+ <!---********this is body of device status page******* --> 
+ <body>
+   <h1> SMART HOME</h1>
+   <!---this is navigation bar with links to other pages -->
+   <ul id="menu">
+     <li><a href="/">Home</a></li>
+     <li><a href="/devices">Add Device</a></li>
+     <li><a href="/device-status">Device Status</a></li>
+     <li><a href="/device-control">Control Device</a></li>
+     <li><a href="/delete-device">Delete Device</a></li> 
+   </ul>
+   <h2>Check your device status</h2>
+
+
+   <!---this is device Selector -->
+   <label for="Devicetype">Device :</label>
+   <!---Call back function code linked to Select element, which executes everytime user selects a device-->
+   <select id="selection" onchange=GetSelectedValue(this) >
+   <!--- EJS code that adds devices to selector using variables passed from middleware  -->
+     <option  value="no-selection" >Select</option>
+     <% availabledevices.forEach(function(device){ %>
+     <option id="<%=device.devicetype %>" title="<%=device.volume%>" value="<%=device.status %>"><%= device.name %> </option>
+     <% }) %>      
+   </select><br></br>
+
+
+   <!-----this is a table that populates with device information when user selects a device-->
+   <table id="devices">
+     <tr>
+       <th> device name</th>
+       <th> device type</th>
+       <th>status</th>
+       <th id="hide" style="display: none;" >volume</th>
+     </tr>
+
+     <tr>
+       <td id="Dname"></td>
+       <td id="Devtype"></td>
+       <td id="Dstatus"></td>
+       <td id="DVolume" style="display: none;"></td>
+     </tr>
+   </table>
+  </body>
+</html>

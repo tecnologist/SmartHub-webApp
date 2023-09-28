@@ -1,0 +1,56 @@
+<!--------This is Delete Device Page-->
+<!doctype html>
+<html>
+  <!----this is head with links to CSS and JS external files-->
+  <head>
+   <title>Delete Device!</title>
+   <link rel="stylesheet" type="text/css" href="/css/mystyles.css">
+   <script src="JS/deleteDevice.js"></script>
+  </head>
+ 
+  <!----this is body of page-->
+ <body>
+   <h1> SMART HOME</h1>
+   <!-------this is Navigation bar with links to other pages-->
+   <ul id="menu">
+     <li><a href="/">Home</a></li>
+     <li><a href="/devices">Add Device</a></li>
+     <li><a href="/device-status">Device Status</a></li>
+     <li><a href="/device-control">Control Device</a></li>
+     <li><a href="/delete-device">Delete Device</a></li>
+   </ul>
+
+   <h2>Delete your Smart device from Smart Hub</h2>
+   <!---this form with device selector,to submit form data by POST request and has form validator function to call back-->
+    <form name = "myForm" method="POST" action="/delete-device"  >
+     <label for="Devicetype">Delete your device here :</label>
+     <!--------this is select element with function to call back to excute when user selects a device -->
+     <select name="name"  onchange="GetSelectedValue(this)" >
+       <option  value="no-selection" >Select</option>
+       <!----this is device selector option where device list is created with EJS code passing variable from middleware-->
+       <% availabledevices.forEach(function(device){ %>
+       <option id="<%=device.id %>"  value="<%= device.name%>"><%= device.name %> </option>
+       <% }) %>
+     </select>
+      
+     
+     <!----this Delete button pops Modal to confirm device deletion-->
+     <button type ="button" value="confirm" onclick="confirm(this)">Delete</button><br></br>
+      <!---Modal code displays message to user, to confirm device deletion-->
+      <div id="id01" class="modal" >
+         <div class="modal-content">
+            <span onclick="confirm(this)" id="close" value="Close Modal" >×</span>
+            <div class="container">
+              <h1>Delete Device</h1>
+              <h3>Are you sure you want to delete your <strong id="smartDevice"></strong> device?</h3>
+            </div>
+            <div class="clearfix">
+              <!---Modal code displays Delete and Cancel buttons-->
+              <input type="submit" type="submit" value="Delete"onclick="confirm(this)" class="deletebtn"></input>
+              <button type="button" value="CANCEL"onclick="confirm(this)" class="cancelbtn">Cancel</button>
+            </div>
+          </div>
+        </div>
+    </form>
+  </body>
+</html>

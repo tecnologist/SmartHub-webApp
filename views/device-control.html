@@ -1,0 +1,70 @@
+<!---this is a device control page------->
+<!doctype html>
+<html>
+ <!---this is head with links to CSS & Java Script external files -->
+ <head>
+   <title>control your device!</title>
+   <link rel="stylesheet" type="text/css" href="/css/mystyles.css">
+   <script src="JS/deviceControl.js"></script>
+ </head>
+
+ <!---********this is body of device control page******* --> 
+ <body>
+   <h1> SMART HOME</h1>
+   <!---this is navigation bar with links to other pages -->
+   <ul id="menu">
+     <li><a href="/">Home</a></li>
+     <li><a href="/devices">Add Device</a></li>
+     <li><a href="/device-status">Device Status</a></li>
+     <li><a href="/device-control">Control Device</a></li>
+     <li><a href="/delete-device">Delete Device</a></li>    
+   </ul>
+   <h2>Control your Smart device here:</h2>
+
+   <!--------this is form with selector options for device name, status & volume-->
+   <form name = "myForm" method="POST" action="/device-control"  onsubmit = "return(validate())";>
+
+     <!--this is device name selector with EJS code passing variables from middleware 
+     to this selector & its attributes-->
+     <label for="Devicetype">Select device:</label>
+     <!--Selector element with function call when user makes or changes selection-->
+     <select name="id"  onchange="GetSelectedValue(this)" >
+       <option  value="no-selection" >Select</option>
+       <% availabledevices.forEach(function(device){ %>
+       <option id="<%= device.status%>" title="<%= device.devicetype%>"><%= device.name %></option>
+       <% }) %>
+     </select><br></br>
+
+     <!--------this is a blank selector -sets devicetype here for user selected device names  -->
+     <label>Device type:</label>
+     <select id="devicetype" name="devicetype">
+        <option id="Dtype"></option>
+     </select>
+
+     <p id="message"> </p>
+     <!---this is device status selector -->
+     <div id="hideStatus" style="display: none;">
+       <label>Change Status :</label>
+       <select id="status"name="status" onchange="ChangeVolume(this)">
+         <option id="select" value="Select" >Select</option>
+         <option id="ON" value= 1 >ON</option> 
+         <option id="OFF" value= 0 >OFF</option>
+       </select> <br></br>
+     </div>
+
+     <!---this is device volume selector -->
+     <div id="volume" style="display: none;">
+       <label>Change Volume :</label>
+       <select  name="volume" >
+         <option id="Select" value="NULL" selected>SELECT</option> 
+         <option id="HI" value="HIGH" >HIGH</option> 
+         <option id="MED" value= "MEDIUM" >MEDIUM</option>
+         <option id="LOW" value="LOW" >LOW</option>
+       </select>
+      </div>
+
+      <!---this is form submit button -->
+     <input type="submit" value="Submit"></input>
+    </form>
+  </body>
+</html>

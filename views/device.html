@@ -1,0 +1,64 @@
+<!---this is add device page- for users to add devices -->
+<!doctype html>
+<html>
+ <!-------this is head with links to CSS and JS external files-->
+ <head>
+    <title>Add device !</title>
+    <link rel="stylesheet" type="text/css" href="/css/mystyles.css">
+    <script src="JS/device.js"></script>
+ </head>
+
+ <!------******this is body of Add Device Page**********-->
+ <body>
+    <h1> SMART HOME</h1>
+    <!-------this is navigation bar with links to other pages-->
+    <ul id="menu">
+       <li><a href="/">Home</a></li>
+       <li><a href="/devices">Add Device</a></li>
+       <li><a href="/device-status">Device Status</a></li>
+       <li><a href="/device-control">Control Device</a></li>
+       <li><a href="/delete-device">Delete Device</a></li> 
+    </ul>
+
+    <h2> Add your Smart Device  </h2>
+    <!-------this is form to add user devices-->
+    <form method="POST" action="/devices"   name = "myForm" onsubmit = "return(validate());">
+        
+       <label for="Dname">Device Name:</label>
+       <!-------this is where user can add a device name-->
+       <input id="device-name" type="text" name="name" placeholder="name "><br></br>
+          <label for="Dtype">Device type:</label>
+          <!-------this is where user can choose device type-->
+          <select id="device-type" name="devicetype" onchange="GetSelectedValue(this)" ;>
+             <option value="no-selection">Select</option>
+             <option value="Bulb">Bulb</option>
+             <option value="Babycam">Babycam</option>
+             <option value="TV">Television</option>
+             <option value="Music Player">Music Player</option>
+             <option value="Curtains">Curtains</option>
+             <option value="Heating">Radiator</option>
+          </select><br></br>
+
+          <!-------this is where user can choose a device status-->
+          <label for="Dtype">Status:</label>
+          <select name="status" onchange="GetSelectedStatus(this)"; >
+             <option id="no-selection" value="no-selection">Select</option>
+             <option id="ON" value=1></option>
+             <option id="OFF" value=0></option>
+          </select><br></br>
+
+          <!-------this is where user can choose device volume-->
+          <div id="myDIV" style="display: none;">
+             <label id="Vlabel"></label>
+             <select  id="volume" name="volume">
+                <option id="Selection" value="NULL"></option>
+                <option id="Hi" value='High'></option>
+                <option id="Med" value='Medium'></option>
+                <option id="Low" value='Low'></option>
+             </select><br></br>
+          </div>
+          <!-------submit button for form-->
+        <input type="submit" value="Submit" >
+    </form>
+ </body>
+</html>

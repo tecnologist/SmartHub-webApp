@@ -1,0 +1,36 @@
+<!-------this is Add device form Post action page-->
+<!doctype html>
+<!----EJS device page renders from middleware once user submits form on add devie HTML page-->
+<html>
+ <head>
+    <title>Added Device!</title>
+    <link rel="stylesheet" type="text/css" href="/css/mystyles.css">
+ </head>
+
+ <body>
+    <h1> SMART HOME</h1>
+    <!----navigation bar-->
+    <ul id="menu">
+       <li><a href="/">Home</a></li>
+       <li><a href="/devices">Add Device</a></li>
+       <li><a href="/device-status">Device Status</a></li>
+       <li><a href="/device-control">Control Device</a></li>
+       <li><a href="/delete-device">Delete Device</a></li>
+     </ul>
+      <!----EJS template code that displays a message for user with device name,type,status &volume 
+       from submitted form data, using variables passed from middleware -->
+    <h2>your smart <%=newdevice[1]%> device <%=newdevice[0]%>  is added to your Smart hub and  is
+       <%if(newdevice[2]==0&&newdevice[1]!="Curtains")
+       {%> turned OFF <%}
+       else if(newdevice[2]==1&&newdevice[1]!="Curtains")
+       {%>  turned ON  <%}
+       if(newdevice[2]==1&&newdevice[1]=="Music Player")
+       {%> & device volume is set <%=newdevice[3]%> <%}%>
+
+       <%if(newdevice[2]==0&&newdevice[1]=="Curtains")
+       {%>  closed<%}
+       else if(newdevice[2]==1&&newdevice[1]=="Curtains")
+       {%> open<%} %> 
+     </h2> 
+ </body>
+</html>
